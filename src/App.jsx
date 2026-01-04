@@ -24,7 +24,7 @@ const App = () => {
       title: "Weather App",
       desc: "Real-time weather tracking with location services.",
       image: "/images/Weather Pro.png",
-      link: "#",
+      link: "https://hjm-built-weather.vercel.app/",
       color: "bg-blue-600"
     },
     {
@@ -38,7 +38,7 @@ const App = () => {
       title: "Movie Vault Pro",
       desc: "Personal cinema database and watchlist manager.",
       image: "/images/Movie Vault Pro.png",
-      link: "#",
+      link: "https://movie-vault-react.vercel.app/",
       color: "bg-slate-800"
     },
     {
