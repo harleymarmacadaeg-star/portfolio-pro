@@ -61,10 +61,14 @@ const App = () => {
           scrolled ? 'bg-white/80 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-5'
         }`}>
           <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-black shadow-lg">H</div>
-              <span className="font-black text-xl tracking-tighter text-slate-900 uppercase">Macadaeg<span className="text-blue-600">.</span></span>
-            </div>
+            <a href="#" className="flex items-center gap-2 group cursor-pointer transition-transform active:scale-95">
+  <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-black shadow-lg group-hover:bg-slate-900 transition-colors">
+    H
+  </div>
+  <span className="font-black text-xl tracking-tighter text-slate-900 uppercase">
+    Macadaeg<span className="text-blue-600">.</span>
+  </span>
+</a>
             
             <div className="hidden md:flex items-center gap-8">
               <a href="#experience" className="text-xs font-bold uppercase tracking-widest text-slate-600 hover:text-blue-600 transition-colors">About</a>
@@ -294,7 +298,7 @@ const App = () => {
         </section>
         </div>
 <Resume />
-
+<div className="print:hidden">
         {/* CONTACT SECTION */}
         <section id="contact" className="py-24 bg-slate-900 overflow-hidden relative scroll-mt-24">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-1/2 bg-blue-600/10 blur-[120px] pointer-events-none"></div>
@@ -361,7 +365,7 @@ const App = () => {
             </div>
           </div>
         </section>
-        
+        </div>
       
 
       {/* 2. PRINT-ONLY RESUME: Explicitly shown only for print outside the main wrapper */}
