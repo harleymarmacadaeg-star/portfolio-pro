@@ -1,53 +1,56 @@
-import React from 'react';
-import { Printer, Award, MapPin, Mail, Phone } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Printer, MapPin, Mail, Phone } from 'lucide-react';
 
 const Resume = () => {
+  const [isPrintMode, setIsPrintMode] = useState(false);
+
   const handlePrint = () => {
-    window.print();
+    setIsPrintMode(true);
   };
 
-  return (
-    <>
-      {/* SECTION 1: VISUAL PREVIEW (Visible on screen, hidden on print) */}
-      <section id="resume" className="py-24 bg-white print:hidden">
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-12">
-            <div>
-              <h2 className="text-3xl font-black text-slate-900 tracking-tight">Professional CV</h2>
-              <p className="text-slate-500 font-medium">Export a clean, one-page A4 document for applications.</p>
-            </div>
-            <button 
-              onClick={handlePrint}
-              className="group flex items-center gap-3 bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-slate-900 transition-all shadow-xl shadow-blue-100"
-            >
-              <Printer size={20} className="group-hover:scale-110 transition-transform" />
-              Generate A4 PDF
-            </button>
-          </div>
-          
-          <div className="bg-slate-50 border-2 border-dashed border-slate-200 p-12 rounded-[3rem] text-center">
-            <div className="inline-flex p-4 bg-white rounded-2xl shadow-sm mb-4">
-              <Award className="text-blue-600" size={32} />
-            </div>
-            <p className="text-slate-900 font-bold">Ready to Print</p>
-            <p className="text-slate-500 text-sm max-w-xs mx-auto mt-2">
-              Click the button above to see your perfectly formatted A4 Resume.
-            </p>
-          </div>
-        </div>
-      </section>
+  useEffect(() => {
+    if (isPrintMode) {
+      window.print();
+      const timer = setTimeout(() => {
+        setIsPrintMode(false);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [isPrintMode]);
 
-      {/* SECTION 2: THE ACTUAL A4 DOCUMENT */}
-      {/* Fix: Using 'invisible h-0' on screen and 'visible h-auto' for print to bypass browser rendering bugs */}
-      <div className="invisible h-0 overflow-hidden print:visible print:h-auto print:overflow-visible bg-white font-sans text-slate-900 mx-auto" 
-           style={{ width: '210mm' }}>
-        <div className="p-12 h-full">
-          
-          {/* Header */}
+  return (
+    <section id="resume" className="py-24 bg-white">
+      <div className="max-w-5xl mx-auto px-6">
+        
+        {/* Header/Control Section - Hidden when printing */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-12 print:hidden">
+          <div>
+            <h2 className="text-3xl font-black text-slate-900 tracking-tight">Professional CV</h2>
+            <p className="text-slate-500 font-medium">Live preview of your A4 document.</p>
+          </div>
+          <button 
+            onClick={handlePrint}
+            className="group flex items-center gap-3 bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-slate-900 transition-all shadow-xl shadow-blue-100"
+          >
+            <Printer size={20} className="group-hover:scale-110 transition-transform" />
+            Generate A4 PDF
+          </button>
+        </div>
+        
+        {/* THE RESUME DOCUMENT */}
+        {/* On screen: rounded with shadow. On print: flat A4. */}
+        <div 
+          id="resume-print-root"
+          className="bg-white font-sans text-slate-900 p-8 md:p-12 mx-auto border border-slate-200 shadow-2xl rounded-2xl print:shadow-none print:border-0 print:p-0" 
+          style={{ width: '100%', maxWidth: '210mm', minHeight: '297mm', boxSizing: 'border-box' }}
+        >
+          {/* Resume Header */}
           <div className="border-b-4 border-blue-600 pb-6 mb-8 flex justify-between items-end">
             <div>
-              <h1 className="text-3xl font-black uppercase tracking-tighter">Harleymar J. Macadaeg, LPT</h1>
-              <p className="text-blue-600 font-bold tracking-widest uppercase text-[10px] mt-1">ICT Specialist • Full-Stack Web Developer • Educator</p>
+              <h1 className="text-3xl font-black uppercase tracking-tighter text-left">Harleymar J. Macadaeg, LPT</h1>
+              <p className="text-blue-600 font-bold tracking-widest uppercase text-[10px] mt-1 text-left">
+                ICT Specialist • Full-Stack Web Developer • Educator
+              </p>
             </div>
             <div className="text-right text-[9px] font-bold text-slate-500 space-y-0.5 uppercase">
               <div className="flex items-center justify-end gap-1.5"><Phone size={10} className="text-blue-600" /> +63 928 031 1520</div>
@@ -56,8 +59,8 @@ const Resume = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-10">
-            {/* Sidebar */}
+          <div className="grid grid-cols-3 gap-10 text-left">
+            {/* Left Sidebar */}
             <div className="col-span-1 space-y-8">
               <section>
                 <h3 className="text-[11px] font-black uppercase tracking-widest text-blue-600 mb-3">Core Expertise</h3>
@@ -65,11 +68,11 @@ const Resume = () => {
                   <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-blue-600 rounded-full"></span> React.js / Vite</li>
                   <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-blue-600 rounded-full"></span> Supabase / SQL</li>
                   <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-blue-600 rounded-full"></span> Tailwind CSS</li>
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-blue-600 rounded-full"></span> CSS NC II Support</li>
+                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-blue-600 rounded-full"></span> API Integration</li>
+                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-blue-600 rounded-full"></span> Computer Systems Servicing</li>
                   <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-blue-600 rounded-full"></span> Adobe Photoshop</li>
                 </ul>
               </section>
-
               <section>
                 <h3 className="text-[11px] font-black uppercase tracking-widest text-blue-600 mb-3">Education</h3>
                 <div className="space-y-4">
@@ -81,18 +84,23 @@ const Resume = () => {
                     <p className="text-[10px] font-black uppercase">Licensed Prof. Teacher</p>
                     <p className="text-[9px] text-slate-500 italic uppercase">PRC Licensed (LPT)</p>
                   </div>
+                  <div>
+                    <p className="text-[10px] font-black uppercase">TESDA Certificate Holder</p>
+                    <p className="text-[9px] text-slate-500 italic uppercase">Trainers Methodology I(TM I)</p>
+                    <p className="text-[9px] text-slate-500 italic uppercase">Computer Systems Servicing NC II(CSS NC II)</p>
+                  </div>
                 </div>
               </section>
             </div>
 
-            {/* Main Content */}
+            {/* Right Main Column */}
             <div className="col-span-2 space-y-6">
               <h3 className="text-[11px] font-black uppercase tracking-widest text-blue-600 mb-4">Professional Roadmap</h3>
               <div className="space-y-6 border-l-2 border-slate-100 pl-6">
                 {[
                   { role: "ICT Teacher / IT Specialist", company: "Sangbay Integrated School", date: "2025 - PRES", desc: "Leading ICT curriculum and digital literacy for secondary students." },
                   { role: "Trainer – JDVP (CSS NC II)", company: "S Two Dolorin Training Institute", date: "2025", desc: "Specialized training for Grade 12 ICT in computer system standards." },
-                  { role: "Digital Media / IT Staff", company: "Nagtipunan Tourism Office", date: "2024 - 2025", desc: "Managed digital assets, drone ops, and municipal IT infrastructure." },
+                  { role: "Digital Media / IT Staff", company: "Nagtipunan Tourism Office", date: "2024 - 2025", desc: "Managed digital assets and municipal IT infrastructure." },
                   { role: "ICT Teacher / Lab Manager", company: "Quirino State University", date: "2017 - 2021", desc: "Instructed Web Development and CSS NC II specialized subjects." },
                   { role: "ICT Teacher / Asst. Registrar", company: "Saint Mary's Academy", date: "2015 - 2017", desc: "Managed computer facilities and supported registrar data ops." }
                 ].map((job, idx) => (
@@ -111,7 +119,7 @@ const Resume = () => {
           </div>
         </div>
       </div>
-    </>
+    </section>
   );
 };
 

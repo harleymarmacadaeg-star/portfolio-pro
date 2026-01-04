@@ -1,4 +1,4 @@
-import Resume from './components/resume';
+import Resume from './components/resume.jsx';
 import React, { useState, useEffect } from 'react';
 import { Github, Mail, ShieldCheck, GraduationCap, ExternalLink, Facebook, Linkedin } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -53,7 +53,7 @@ const App = () => {
   return (
     <div className="min-h-screen bg-slate-50 font-sans selection:bg-blue-100">
       
-      {/* --- WEBSITE CONTENT (HIDDEN ON PRINT) --- */}
+      {/* 1. WEBSITE CONTENT: Hidden during printing */}
       <div className="print:hidden">
         
         {/* NAVIGATION */}
@@ -178,7 +178,6 @@ const App = () => {
       </div>
     </div>
 
-    {/* Improved: Scale only on desktop (md:), full size on mobile for better readability */}
     <div className="grid grid-cols-1 md:grid-cols-6 gap-8 transform md:scale-95 origin-top transition-transform duration-500">
       {projects.map((project, idx) => (
         <motion.div 
@@ -216,7 +215,6 @@ const App = () => {
               src={project.image} 
               alt={project.title} 
               className="w-full h-full object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.4)]" 
-              // Added Fallback: Shows a clean placeholder if the image file is missing
               onError={(e) => {
                 e.target.onerror = null; 
                 e.target.src = "https://placehold.co/600x400/1e293b/ffffff?text=Preview+Coming+Soon";
@@ -294,84 +292,81 @@ const App = () => {
             </div>
           </div>
         </section>
+        </div>
 <Resume />
-        {/* CONTACT SECTION - Direct Connect Version */}
-<section id="contact" className="py-24 bg-slate-900 overflow-hidden relative scroll-mt-24">
-  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-1/2 bg-blue-600/10 blur-[120px] pointer-events-none"></div>
-  <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-    
-    <div className="mb-16">
-      <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight mb-6">
-        Let's Build the <span className="text-blue-500">Future</span> Together
-      </h2>
-      <p className="text-slate-400 font-medium max-w-xl mx-auto text-lg leading-relaxed">
-        I'm currently available for ICT consultancy, full-stack development roles, and educational technology partnerships.
-      </p>
-    </div>
 
-    <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-10 rounded-[3.5rem] max-w-4xl mx-auto shadow-2xl">
-      <div className="grid md:grid-cols-2 gap-12 items-center">
-        
-        {/* Email Focus */}
-        <div className="text-left space-y-8">
-          <div className="space-y-3">
-            <p className="text-blue-500 font-bold uppercase tracking-[0.2em] text-xs">Get in Touch</p>
-            <h3 className="text-white text-3xl font-black">Have a project?</h3>
-            <p className="text-slate-400 text-sm">Click below to send me an email directly. I usually respond within 24 hours.</p>
+        {/* CONTACT SECTION */}
+        <section id="contact" className="py-24 bg-slate-900 overflow-hidden relative scroll-mt-24">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-1/2 bg-blue-600/10 blur-[120px] pointer-events-none"></div>
+          <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
+            
+            <div className="mb-16">
+              <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight mb-6">
+                Let's Build the <span className="text-blue-500">Future</span> Together
+              </h2>
+              <p className="text-slate-400 font-medium max-w-xl mx-auto text-lg leading-relaxed">
+                I'm currently available for ICT consultancy, full-stack development roles, and educational technology partnerships.
+              </p>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-10 rounded-[3.5rem] max-w-4xl mx-auto shadow-2xl">
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                
+                <div className="text-left space-y-8">
+                  <div className="space-y-3">
+                    <p className="text-blue-500 font-bold uppercase tracking-[0.2em] text-xs">Get in Touch</p>
+                    <h3 className="text-white text-3xl font-black">Have a project?</h3>
+                    <p className="text-slate-400 text-sm">Click below to send me an email directly. I usually respond within 24 hours.</p>
+                  </div>
+                  
+                  <a 
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=harleymarmacadaeg@gmail.com" 
+                    target="_blank" 
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-3 bg-blue-600 hover:bg-blue-500 text-white px-8 py-5 rounded-2xl font-black transition-all shadow-xl shadow-blue-600/20 group"
+                  >
+                    <Mail className="group-hover:rotate-12 transition-transform" />
+                    EMAIL ME NOW
+                  </a>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <a href="https://web.facebook.com/harleymar.macadaeg" target="_blank" rel="noreferrer" className="group bg-white/5 p-6 rounded-3xl hover:bg-blue-600 transition-all duration-300 flex flex-col items-center gap-3 border border-white/5">
+                    <Facebook className="text-white group-hover:scale-110 transition-transform" />
+                    <span className="text-white text-[10px] font-black uppercase tracking-widest">Facebook</span>
+                  </a>
+                  <a href="https://www.linkedin.com/in/harleymar-macadaeg-lpt-9a4340129/" target="_blank" rel="noreferrer" className="group bg-white/5 p-6 rounded-3xl hover:bg-blue-700 transition-all duration-300 flex flex-col items-center gap-3 border border-white/5">
+                    <Linkedin className="text-white group-hover:scale-110 transition-transform" />
+                    <span className="text-white text-[10px] font-black uppercase tracking-widest">LinkedIn</span>
+                  </a>
+                  <a href="https://github.com/harleymarmacadaeg-star" target="_blank" rel="noreferrer" className="group bg-white/5 p-6 rounded-3xl hover:bg-slate-800 transition-all duration-300 flex flex-col items-center gap-3 col-span-2 border border-white/5">
+                    <Github className="text-white group-hover:scale-110 transition-transform" />
+                    <span className="text-white text-[10px] font-black uppercase tracking-widest">GitHub Portfolio</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-12 inline-flex items-center gap-3 px-6 py-3 bg-emerald-500/10 border border-emerald-500/20 rounded-full">
+              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+              <span className="text-emerald-500 text-xs font-black uppercase tracking-widest">Ready for new opportunities in 2026</span>
+            </div>
+
+            <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-xs font-bold uppercase tracking-widest">
+              <p>© 2026 HARLEYMAR MACADAEG</p>
+              <div className="flex gap-8">
+                <p>LPT • CSS NC II • TM I</p>
+                <span>Philippines</span>
+              </div>
+            </div>
           </div>
-          
-          <a 
-            href="https://mail.google.com/mail/?view=cm&fs=1&to=harleymarmacadaeg@gmail.com" 
-            target="_blank" 
-            rel="noreferrer"
-            className="inline-flex items-center gap-3 bg-blue-600 hover:bg-blue-500 text-white px-8 py-5 rounded-2xl font-black transition-all shadow-xl shadow-blue-600/20 group"
-          >
-            <Mail className="group-hover:rotate-12 transition-transform" />
-            EMAIL ME NOW
-          </a>
-        </div>
+        </section>
+        
+      
 
-        {/* Social Grid */}
-        <div className="grid grid-cols-2 gap-4">
-          <a href="https://web.facebook.com/harleymar.macadaeg" target="_blank" rel="noreferrer" className="group bg-white/5 p-6 rounded-3xl hover:bg-blue-600 transition-all duration-300 flex flex-col items-center gap-3 border border-white/5">
-            <Facebook className="text-white group-hover:scale-110 transition-transform" />
-            <span className="text-white text-[10px] font-black uppercase tracking-widest">Facebook</span>
-          </a>
-          <a href="https://www.linkedin.com/in/harleymar-macadaeg-lpt-9a4340129/" target="_blank" rel="noreferrer" className="group bg-white/5 p-6 rounded-3xl hover:bg-blue-700 transition-all duration-300 flex flex-col items-center gap-3 border border-white/5">
-            <Linkedin className="text-white group-hover:scale-110 transition-transform" />
-            <span className="text-white text-[10px] font-black uppercase tracking-widest">LinkedIn</span>
-          </a>
-          <a href="https://github.com/harleymarmacadaeg-star" target="_blank" rel="noreferrer" className="group bg-white/5 p-6 rounded-3xl hover:bg-slate-800 transition-all duration-300 flex flex-col items-center gap-3 col-span-2 border border-white/5">
-            <Github className="text-white group-hover:scale-110 transition-transform" />
-            <span className="text-white text-[10px] font-black uppercase tracking-widest">GitHub Portfolio</span>
-          </a>
-        </div>
-      </div>
-    </div>
+      {/* 2. PRINT-ONLY RESUME: Explicitly shown only for print outside the main wrapper */}
+      
 
-    {/* Availability Badge */}
-    <div className="mt-12 inline-flex items-center gap-3 px-6 py-3 bg-emerald-500/10 border border-emerald-500/20 rounded-full">
-      <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-      <span className="text-emerald-500 text-xs font-black uppercase tracking-widest">Ready for new opportunities in 2026</span>
-    </div>
-
-    {/* Credits */}
-    <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-xs font-bold uppercase tracking-widest">
-      <p>© 2026 HARLEYMAR MACADAEG</p>
-      <div className="flex gap-8">
-        <p>LPT • CSS NC II • TM I</p>
-        <span>Philippines</span>
-      </div>
-    </div>
-  </div>
-</section>
-      </div>
-
-     {/* <Resume /> */}
-
-      {/* <footer className="bg-slate-50 py-12 border-t border-slate-200 print:hidden text-center">
-        <p className="text-slate-400 text-xs font-black uppercase tracking-widest">© 2026 Harleymar J. Macadaeg</p>
-      </footer> */}
     </div>
   );
 };
