@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Printer, MapPin, Mail, Phone } from 'lucide-react';
+// Combine all icons into one single import statement
+import { Printer, MapPin, Mail, Phone, Download } from 'lucide-react';
 
 const Resume = () => {
   const [isPrintMode, setIsPrintMode] = useState(false);
@@ -28,24 +29,30 @@ const Resume = () => {
             <h2 className="text-3xl font-black text-slate-900 tracking-tight">Professional CV</h2>
             <p className="text-slate-500 font-medium">Live preview of your A4 document.</p>
           </div>
-          <button 
-            onClick={handlePrint}
-            className="group flex items-center gap-3 bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-slate-900 transition-all shadow-xl shadow-blue-100"
-          >
-            <Printer size={20} className="group-hover:scale-110 transition-transform" />
-            Generate A4 PDF
-          </button>
+         <button 
+  onClick={handlePrint}
+  className="group flex items-center gap-3 bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-slate-900 transition-all shadow-xl shadow-blue-100 active:scale-95"
+>
+  <Download size={20} className="group-hover:translate-y-0.5 transition-transform" />
+  Download CV (A4 PDF)
+</button>
         </div>
         
         {/* THE RESUME DOCUMENT */}
         {/* On screen: rounded with shadow. On print: flat A4. */}
         <div 
-          id="resume-print-root"
-          className="bg-white font-sans text-slate-900 p-8 md:p-12 mx-auto border border-slate-200 shadow-2xl rounded-2xl print:shadow-none print:border-0 print:p-0" 
-          style={{ width: '100%', maxWidth: '210mm', minHeight: '297mm', boxSizing: 'border-box' }}
-        >
+  id="resume-print-root"
+  className="bg-white font-sans text-slate-900 p-8 md:p-12 mx-auto border border-slate-200 shadow-2xl rounded-2xl print:shadow-none print:border-0 print:p-0 print:m-0" 
+  style={{ 
+    width: '100%', 
+    maxWidth: '210mm', 
+    minHeight: '297mm', 
+    boxSizing: 'border-box',
+    aspectRatio: '1 / 1.414' // Forces A4 Aspect Ratio
+  }}
+>
           {/* Resume Header */}
-          <div className="border-b-4 border-blue-600 pb-6 mb-8 flex justify-between items-end">
+          <div className="border-b-4 border-blue-600 pb-4 mb-6 flex justify-between items-end">
             <div>
               <h1 className="text-3xl font-black uppercase tracking-tighter text-left">Harleymar J. Macadaeg, LPT</h1>
               <p className="text-blue-600 font-bold tracking-widest uppercase text-[10px] mt-1 text-left">
