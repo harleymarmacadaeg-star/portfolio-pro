@@ -37,9 +37,10 @@ const Resume = () => {
         </div>
       </section>
 
-      {/* SECTION 2: THE ACTUAL A4 DOCUMENT (Hidden on screen via absolute opacity, visible on print) */}
-      <div className="opacity-0 pointer-events-none absolute print:relative print:opacity-100 print:pointer-events-auto print:block bg-white font-sans text-slate-900 mx-auto" 
-           style={{ width: '210mm', minHeight: '297mm' }}>
+      {/* SECTION 2: THE ACTUAL A4 DOCUMENT */}
+      {/* Fix: Using 'invisible h-0' on screen and 'visible h-auto' for print to bypass browser rendering bugs */}
+      <div className="invisible h-0 overflow-hidden print:visible print:h-auto print:overflow-visible bg-white font-sans text-slate-900 mx-auto" 
+           style={{ width: '210mm' }}>
         <div className="p-12 h-full">
           
           {/* Header */}
